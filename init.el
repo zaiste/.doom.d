@@ -4,10 +4,8 @@
 (global-auto-revert-mode t)
 
 (setq
- doom-font (font-spec :family "DejaVu Sans Mono" :size 18)
- doom-variable-pitch-font (font-spec :family "Avenir Next" :size 18)
- org-ellipsis " ▼ "
- org-bullets-bullet-list '("·"))
+ doom-font (font-spec :family "Menlo" :size 20)
+ doom-variable-pitch-font (font-spec :family "Avenir Next" :size 18))
 
 (add-hook 'org-mode-hook #'auto-fill-mode)
 
@@ -122,9 +120,9 @@
       ;irc               ; how neckbeards socialize
       ;(rss +org)        ; emacs as an RSS reader
       ;twitter           ; twitter client https://twitter.com/vnought
-       (write            ; emacs as a word processor (latex + org + markdown)
-        +wordnut         ; wordnet (wn) search
-        +langtool)       ; a proofreader (grammar/style check) for Emacs
+       ;(write            ; emacs as a word processor (latex + org + markdown)
+       ; +wordnut         ; wordnet (wn) search
+       ; +langtool)       ; a proofreader (grammar/style check) for Emacs
 
        :config
        ;; The default module set reasonable defaults for Emacs. It also provides
