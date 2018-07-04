@@ -1,15 +1,32 @@
+(global-auto-revert-mode t)
+
+(add-hook 'org-mode-hook #'auto-fill-mode)
+
 (setq
+ doom-font (font-spec :family "Menlo" :size 20)
+ doom-big-font (font-spec :family "Menlo" :size 30)
+ doom-variable-pitch-font (font-spec :family "Avenir Next" :size 18)
  web-mode-markup-indent-offset 2
+ web-mode-code-indent-offset 2
+ org-agenda-skip-scheduled-if-done t
  js-indent-level 2
  org-ellipsis " ▾ "
  org-bullets-bullet-list '("·")
- ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
+ org-tags-column -80
+ org-agenda-files (ignore-errors (directory-files +org-dir t "\\.org$" t))
+ org-log-done 'time
+ css-indent-offset 2
+ org-capture-templates (append '(("x" "Note" item
+                                  (file+olp+datetree "life.org" "Journal")
+                                  "- %U %?" :prepend t :kill-buffer t))
+                               org-capture-templates))
 
-(setq org-capture-templates
-      (append '(("x" "Something1" item
-                 (file+olp+datetree "life.org" "Journal")
-                 "- %U %?" :prepend t :kill-buffer t))
-              org-capture-templates))
+(add-hook! reason-mode
+  (add-hook 'before-save-hook #'refmt-before-save nil t))
+
+(add-hook!
+  js2-mode 'prettier-js-mode
+  (add-hook 'before-save-hook #'refmt-before-save nil t))
 
 (map! :ne "M-/" #'comment-or-uncomment-region)
 
@@ -31,22 +48,51 @@
                       :foreground "#5B6268"
                       :background nil)
   (set-face-attribute 'org-level-1 nil
-                      :foreground "slategray1"
+                      :foreground "MediumPurple1"
                       :background nil
                       :height 1.0
                       :weight 'normal)
   (set-face-attribute 'org-level-2 nil
-                      :foreground "grey"
+                      :foreground "slategray1"
                       :background nil
                       :height 1.0
                       :weight 'normal)
   (set-face-attribute 'org-level-3 nil
-                      :foreground "grey"
+                      :foreground "SkyBlue2"
                       :background nil
                       :height 1.0
+                      :weight 'normal)
+  (set-face-attribute 'org-level-4 nil
+                      :foreground "DodgerBlue2"
+                      :background nil
+                      :height 1.0
+                      :weight 'normal)
+  (set-face-attribute 'org-level-5 nil
+                      :weight 'normal)
+  (set-face-attribute 'org-level-6 nil
                       :weight 'normal)
   (set-face-attribute 'org-document-title nil
                       :foreground "SlateGray1"
                       :background nil
                       :height 2.0
-                      :weight 'normal))
+                      :weight 'normal)
+  (setq org-fancy-priorities-list '("⚡" "⬆" "⬇" "☕")))
+
+(after! ruby
+  (add-to-list 'hs-special-modes-alist
+               `(ruby-mode
+                 ,(rx (or "def" "class" "module" "do" "{" "[")) ; Block start
+                 ,(rx (or "}" "]" "end"))                       ; Block end
+                 ,(rx (or "#" "=begin"))                        ; Comment start
+                 ruby-forward-sexp nil)))
+
+(defun +data-hideshow-forward-sexp (arg)
+  (let ((start (current-indentation)))
+    (forward-line)
+    (unless (= start (current-indentation))
+      (require 'evil-indent-plus)
+      (let ((range (evil-indent-plus--same-indent-range)))
+        (goto-char (cadr range))
+        (end-of-line)))))
+
+(add-to-list 'hs-special-modes-alist '(yaml-mode "\\s-*\\_<\\(?:[^:]+\\)\\_>" "" "#" +data-hideshow-forward-sexp nil))
