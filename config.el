@@ -1,3 +1,8 @@
+(add-to-list 'default-frame-alist
+             '(ns-transparent-titlebar . t))
+(add-to-list 'default-frame-alist
+             '(ns-appearance . dark))
+
 (global-auto-revert-mode t)
 
 (add-hook 'org-mode-hook #'auto-fill-mode)
@@ -48,12 +53,12 @@
                       :foreground "#5B6268"
                       :background nil)
   (set-face-attribute 'org-level-1 nil
-                      :foreground "MediumPurple1"
+                      :foreground "steelblue2"
                       :background nil
-                      :height 1.0
+                      :height 1.2
                       :weight 'normal)
   (set-face-attribute 'org-level-2 nil
-                      :foreground "slategray1"
+                      :foreground "slategray2"
                       :background nil
                       :height 1.0
                       :weight 'normal)
@@ -74,8 +79,8 @@
   (set-face-attribute 'org-document-title nil
                       :foreground "SlateGray1"
                       :background nil
-                      :height 2.0
-                      :weight 'normal)
+                      :height 1.75
+                      :weight 'bold)
   (setq org-fancy-priorities-list '("⚡" "⬆" "⬇" "☕")))
 
 (after! ruby
@@ -96,3 +101,9 @@
         (end-of-line)))))
 
 (add-to-list 'hs-special-modes-alist '(yaml-mode "\\s-*\\_<\\(?:[^:]+\\)\\_>" "" "#" +data-hideshow-forward-sexp nil))
+
+(remove-hook 'enh-ruby-mode-hook #'+ruby|init-robe)
+
+(setq +magit-hub-features t)
+
+
