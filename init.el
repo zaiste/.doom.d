@@ -3,66 +3,70 @@
 
 
 (doom! :feature
-      ;debugger          ; FIXME stepping through code, to help you add bugs
-       eval              ; run code, run (also, repls)
-       (evil +everywhere); come to the dark side, we have cookies
-       file-templates    ; auto-snippets for empty files
-       (lookup           ; helps you navigate your code and documentation
-        +devdocs         ; ...on devdocs.io online
-        +docsets)        ; ...or in Dash docsets locally
-       snippets          ; my elves. They type so I don't have to
-       spellcheck        ; tasing you for misspelling mispelling
-       syntax-checker    ; tasing you for every semicolon you forget
-       workspaces        ; tab emulation, persistence & separate workspaces
+                                        ;debugger          ; FIXME stepping through code, to help you add bugs
 
        :completion
        (company          ; the ultimate code completion backend
+        +tng
         +auto            ; as-you-type code completion
         +childframe)     ; a nicer company UI. Emacs +26 only!
-       ivy     		; a search engine for love and life
+       (ivy
+        +fuzzy); a search engine for love and life
 
        :ui
-       (popup            ; tame sudden yet inevitable temporary windows
-        +all             ; catch all popups that start with an asterix
-        +defaults)       ; default popup rules
+       deft
+       workspaces        ; tab emulation, persistence & separate workspaces
        doom              ; what makes DOOM look the way it does
        doom-dashboard    ; a nifty splash screen for Emacs
-       doom-modeline     ; a snazzy Atom-inspired mode-line
+       modeline     ; a snazzy Atom-inspired mode-line
        doom-quit         ; DOOM quit-message prompts when you quit Emacs
-       evil-goggles      ; display visual hints when editing in evil
+       ophints           ; display visual hints when editing in evil
        hl-todo           ; highlight TODO/FIXME/NOTE tags
        nav-flash         ; blink the current line after jumping
        treemacs          ; a project drawer, like neotree but cooler
-      ;posframe          ; use child frames where possible (Emacs 26+ only)
-      ;tabbar            ; FIXME an (incomplete) tab bar for Emacs
-      ;unicode           ; extended unicode support for various languages
+       (popup            ; tame sudden yet inevitable temporary windows
+        +all             ; catch all popups that start with an asterix
+        +defaults)       ; default popup rules
        vc-gutter         ; vcs diff in the fringe
        vi-tilde-fringe   ; fringe tildes to mark beyond EOB
        window-select     ; visually switch windows
 
        :emacs
-       dired             ; making dired pretty [functional]
-       ediff             ; comparing files in Emacs
+       (dired
+        +icons); making dired pretty [functional]
        electric          ; smarter, keyword-based electric-indent
-       eshell            ; a consistent, cross-platform shell (WIP)
-       imenu             ; an imenu sidebar and searchable code index
-       ;term             ; terminals in Emacs
        vc                ; version-control and Emacs, sitting in a tree
 
+       :term
+       eshell            ; a consistent, cross-platform shell (WIP)
+       vterm
+
+
        :editor
-       parinfer          ; turn lisp into python, sort of
+       (evil +everywhere); come to the dark side, we have cookies
+       file-templates    ; auto-snippets for empty files
+       fold
+       multiple-cursors  ; editing in many places at once
+       snippets          ; my elves. They type so I don't have to
+       ;;parinfer          ; turn lisp into python, sort of
        rotate-text       ; cycle region at point between text candidates
 
        :tools
+       eval              ; run code, run (also, repls)
        gist              ; interacting with github gists
-      ;macos             ; MacOS-specific commands
+       (lookup           ; helps you navigate your code and documentation
+        +devdocs         ; ...on devdocs.io online
+        +docsets)        ; ...or in Dash docsets locally
+                                        ;macos             ; MacOS-specific commands
        make              ; run make tasks from Emacs
        magit             ;
-       password-store    ; password manager for nerds
-      ;pdf               ; pdf enhancements
-      ;rgb               ; creating color strings
+       pass          ; password manager for nerds
+                                        ;pdf               ; pdf enhancements
+                                        ;rgb               ; creating color strings
        tmux              ; an API for interacting with tmux
        upload            ; map local to remote projects via ssh/ftp
+       flycheck
+       flyspell
 
        :lang
        ;; assembly          ; assembly for fun or debugging
@@ -70,8 +74,9 @@
        ;; crystal           ; ruby at the speed of c
        ;; clojure           ; java with a lisp
        ;; csharp            ; unity, .NET, and mono shenanigans
+       common-lisp
        data              ; config/data formats
-      ;erlang            ; an elegant language for a more civilized age
+                                        ;erlang            ; an elegant language for a more civilized age
        ;; elixir            ; erlang done right
        ;; elm               ; care for a cup of TEA?
        emacs-lisp        ; drown in parentheses
@@ -93,9 +98,9 @@
         +babel           ; running code in org
         +capture         ; org-capture in and outside of Emacs
         +export          ; Exporting org to whatever you want
-        +present         ; Emacs for presentations
+        +present)         ; Emacs for presentations
         ;; +publish        ; Emacs+Org as a static site generator
-       )
+
        ;; perl              ; write code no one else can comprehend
        ;; php               ; perl's insecure younger brother
        ;; plantuml          ; diagrams for confusing people more
@@ -113,13 +118,13 @@
        ;; toward a specific purpose. They may have additional dependencies and
        ;; should be loaded late.
        :app
-      ;(email +gmail)    ; emacs as an email client
-      ;irc               ; how neckbeards socialize
-      ;(rss +org)        ; emacs as an RSS reader
-      ;twitter           ; twitter client https://twitter.com/vnought
-       ;(write            ; emacs as a word processor (latex + org + markdown)
-       ; +wordnut         ; wordnet (wn) search
-       ; +langtool)       ; a proofreader (grammar/style check) for Emacs
+                                        ;(email +gmail)    ; emacs as an email client
+                                        ;irc               ; how neckbeards socialize
+                                        ;(rss +org)        ; emacs as an RSS reader
+                                        ;twitter           ; twitter client https://twitter.com/vnought
+                                        ;(write            ; emacs as a word processor (latex + org + markdown)
+                                        ; +wordnut         ; wordnet (wn) search
+                                        ; +langtool)       ; a proofreader (grammar/style check) for Emacs
 
        :config
        ;; The default module set reasonable defaults for Emacs. It also provides
