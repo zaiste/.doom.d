@@ -70,6 +70,7 @@
   (add-hook 'before-save-hook #'refmt-before-save nil t))
 
 (map! :ne "M-/" #'comment-or-uncomment-region)
+(map! :ne "SPC / r" #'deadgrep)
 
 ;; (def-package! parinfer ; to configure it
 ;;   :bind (("C-," . parinfer-toggle-mode)
