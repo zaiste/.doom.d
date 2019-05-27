@@ -18,8 +18,8 @@
 (add-hook! 'org-capture-mode-hook (company-mode -1))
 
 (setq
- doom-font (font-spec :family "Menlo" :size 20)
- doom-big-font (font-spec :family "Menlo" :size 30)
+ doom-font (font-spec :family "SF Mono" :size 20)
+ doom-big-font (font-spec :family "SF Mono" :size 36)
  doom-variable-pitch-font (font-spec :family "Avenir Next" :size 18)
  web-mode-markup-indent-offset 2
  web-mode-code-indent-offset 2
