@@ -21,10 +21,17 @@
  doom-font (font-spec :family "SF Mono" :size 20)
  doom-big-font (font-spec :family "SF Mono" :size 36)
  doom-variable-pitch-font (font-spec :family "Avenir Next" :size 18)
+ dart-format-on-save t
  web-mode-markup-indent-offset 2
  web-mode-code-indent-offset 2
+ web-mode-css-indent-offset 2
+ mac-command-modifier 'meta
  org-agenda-skip-scheduled-if-done t
  js-indent-level 2
+ typescript-indent-level 2
+ json-reformat:indent-width 2
+ prettier-js-args '("--single-quote")
+ projectile-project-search-path '("~/code/")
  org-ellipsis " ▾ "
  org-bullets-bullet-list '("·")
  org-tags-column -80
@@ -100,6 +107,9 @@
                  ,(rx (or "}" "]" "end"))                       ; Block end
                  ,(rx (or "#" "=begin"))                        ; Comment start
                  ruby-forward-sexp nil)))
+
+(after! web-mode
+  (add-to-list 'auto-mode-alist '("\\.njk\\'" . web-mode)))
 
 (defun +data-hideshow-forward-sexp (arg)
   (let ((start (current-indentation)))
