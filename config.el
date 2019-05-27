@@ -7,6 +7,16 @@
 
 (add-hook 'org-mode-hook #'auto-fill-mode)
 
+(defun +org*update-cookies ()
+  (when (and buffer-file-name (file-exists-p buffer-file-name))
+    (let (org-hierarchical-todo-statistics)
+      (org-update-parent-todo-statistics))))
+
+(advice-add #'+org|update-cookies :override #'+org*update-cookies)
+
+(add-hook! 'org-mode-hook (company-mode -1))
+(add-hook! 'org-capture-mode-hook (company-mode -1))
+
 (setq
  doom-font (font-spec :family "Menlo" :size 20)
  doom-big-font (font-spec :family "Menlo" :size 30)
