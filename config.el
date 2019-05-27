@@ -32,6 +32,7 @@
  json-reformat:indent-width 2
  prettier-js-args '("--single-quote")
  projectile-project-search-path '("~/code/")
+ dired-dwim-target t
  org-ellipsis " ▾ "
  org-bullets-bullet-list '("·")
  org-tags-column -80
