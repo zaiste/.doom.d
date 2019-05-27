@@ -39,10 +39,28 @@
  org-agenda-files (ignore-errors (directory-files +org-dir t "\\.org$" t))
  org-log-done 'time
  css-indent-offset 2
- org-capture-templates (append '(("x" "Note" item
-                                  (file+olp+datetree "life.org" "Journal")
-                                  "- %U %?" :prepend t :kill-buffer t))
-                               org-capture-templates))
+ org-refile-targets (quote ((nil :maxlevel . 1)))
+ org-capture-templates '(("x" "Note" entry
+                          (file+olp+datetree "journal.org")
+                          "**** [ ] %U %?" :prepend t :kill-buffer t)
+                         ("t" "Task" entry
+                          (file+headline "tasks.org" "Inbox")
+                          "* [ ] %?\n%i" :prepend t :kill-buffer t))
+ +doom-dashboard-banner-file (expand-file-name "logo.png" doom-private-dir)
+ +org-capture-todo-file "tasks.org"
+ org-super-agenda-groups '((:name "Today"
+                                  :time-grid t
+                                  :scheduled today)
+                           (:name "Due today"
+                                  :deadline today)
+                           (:name "Important"
+                                  :priority "A")
+                           (:name "Overdue"
+                                  :deadline past)
+                           (:name "Due soon"
+                                  :deadline future)
+                           (:name "Big Outcomes"
+                                  :tag "bo")))
 
 (add-hook! reason-mode
   (add-hook 'before-save-hook #'refmt-before-save nil t))
@@ -126,5 +144,9 @@
 (remove-hook 'enh-ruby-mode-hook #'+ruby|init-robe)
 
 (setq +magit-hub-features t)
+
+(set-popup-rule! "^\\*Org Agenda" :side 'bottom :size 0.90 :select t :ttl nil)
+(set-popup-rule! "^CAPTURE.*\\.org$" :side 'bottom :size 0.90 :select t :ttl nil)
+(set-popup-rule! "^\\*org-brain" :side 'right :size 1.00 :select t :ttl nil)
 
 
