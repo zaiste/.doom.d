@@ -71,6 +71,7 @@
 
 (map! :ne "M-/" #'comment-or-uncomment-region)
 (map! :ne "SPC / r" #'deadgrep)
+(map! :ne "SPC n b" #'org-brain-visualize)
 
 ;; (def-package! parinfer ; to configure it
 ;;   :bind (("C-," . parinfer-toggle-mode)
