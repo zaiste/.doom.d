@@ -1,37 +1,35 @@
 (add-to-list 'default-frame-alist
              '(ns-transparent-titlebar . t))
 (add-to-list 'default-frame-alist
-             '(ns-appearance . dark))
+             '(ns-appearance . light))
 
 (global-auto-revert-mode t)
 
-(add-hook 'org-mode-hook #'auto-fill-mode)
+(add-hook! 'org-mode-hook #'+org-pretty-mode #'mixed-pitch-mode)
 
-(defun +org*update-cookies ()
-  (when (and buffer-file-name (file-exists-p buffer-file-name))
-    (let (org-hierarchical-todo-statistics)
-      (org-update-parent-todo-statistics))))
-
-(advice-add #'+org|update-cookies :override #'+org*update-cookies)
 
 (add-hook! 'org-mode-hook (company-mode -1))
 (add-hook! 'org-capture-mode-hook (company-mode -1))
 
+(setq baby-blue '("#d2ecff" "#d2ecff" "brightblue"))
+
+
 (setq
- doom-font (font-spec :family "SF Mono" :size 20)
- doom-big-font (font-spec :family "SF Mono" :size 36)
- doom-variable-pitch-font (font-spec :family "Avenir Next" :size 18)
+ doom-theme 'zaiste
+ doom-font (font-spec :family "Iosevka Term SS04" :size 24 :weight 'light)
+ doom-big-font (font-spec :family "Iosevka Term SS04" :size 36)
+ doom-variable-pitch-font (font-spec :family "SF Pro Text")
+ default-directory "~"
  dart-format-on-save t
  web-mode-markup-indent-offset 2
  web-mode-code-indent-offset 2
  web-mode-css-indent-offset 2
  mac-command-modifier 'meta
- org-agenda-skip-scheduled-if-done t
  js-indent-level 2
  typescript-indent-level 2
  json-reformat:indent-width 2
  prettier-js-args '("--single-quote")
- projectile-project-search-path '("~/code/")
+ projectile-project-search-path '("~/code/" "~/websites/")
  dired-dwim-target t
  org-ellipsis " ▾ "
  org-bullets-bullet-list '("·")
